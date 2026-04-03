@@ -36,6 +36,12 @@ Copy `custom_components/kismet_tracker` into `/config/custom_components/`, resta
 4. **Allow list:** only MACs you want as `device_tracker` (comma or newline).
 5. Finish the flow; tune **Options** (poll interval, away timeout, RSSI, optional “recent RF devices” sensor).
 
-## 4. Push / branch reminder
+## 4. Add-on does not appear in the store
+
+- **Architecture:** the add-on declares `arch` (including `armhf`, `i386`) so it matches common Home Assistant OS boards; if it still does not show, open **Settings → System → Logs**, choose **Supervisor**, and look for parse/build errors for `kismet`.
+- **Reload:** **Settings → Add-ons →** (store) refresh the page; or restart the **Supervisor** host from **Developer tools** if you use it.
+- **Stale git clone:** Remove the custom repository URL, save, add it again so the supervisor re-clones the repo.
+
+## 5. Push / branch reminder
 
 After `git push origin dev`, either set **default branch** to `dev` on GitHub for these repos or merge `dev` into `main` so the Add-on store and HACS see the latest code on the default branch.
