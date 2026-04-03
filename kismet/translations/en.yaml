@@ -1,0 +1,13 @@
+configuration:
+  wifi_interfaces:
+    name: Wi-Fi interfaces
+    description: Comma-separated interfaces (e.g. wlan0,wlan1). Put in monitor mode before Kismet starts.
+  enable_ble_capture:
+    name: Enable BLE
+    description: Add Linux Bluetooth HCI capture (requires compatible adapter).
+  ble_interface:
+    name: BLE HCI device
+    description: HCI device name when BLE capture is enabled (e.g. hci0).
+  kismet_additional_args:
+    name: Extra Kismet arguments
+    description: Optional arguments appended to the Kismet command line.
