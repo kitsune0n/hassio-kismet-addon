@@ -18,7 +18,7 @@ The image installs `kismet-core`, `kismet-capture-linux-wifi`, `kismet-capture-l
 
 1. **Settings → Add-ons → ⋮ → Repositories** → add this Git URL.
 2. Find **Kismet Sniffer** in the store under the new section and install it.
-3. Configure **Wi-Fi interfaces** (see below), optionally set fixed **HTTP username/password** for the native UI, start the add-on, check logs.
+3. Configure **Wi-Fi interfaces** (see below); **HTTP username/password** default to **admin / admin** so the native Web UI skips the first-run wizard — change them in add-on options if needed, then start the add-on.
 4. Use **Open Web UI** on the add-on card to open the standard Kismet dashboard (`http://<host>:2501`).
 
 Use the companion **ha-kismet-tracker** Home Assistant custom integration (sibling repo in the same mono-project, or your fork) to poll Kismet’s JSON API for whitelisted MAC addresses only.
@@ -31,7 +31,7 @@ Use the companion **ha-kismet-tracker** Home Assistant custom integration (sibli
 | `enable_ble_capture` | Adds a BLE/HCI capture source when `true`. |
 | `ble_interface` | HCI name (default `hci0`). |
 | `kismet_additional_args` | Extra CLI flags passed to `kismet`. |
-| `http_username` / `http_password` | Optional. If both set, Kismet gets a fixed admin login via `kismet_site.conf` (persistent under `/data/kismet_home`). Otherwise open the Web UI once to create the admin user. |
+| `http_username` / `http_password` | Default **admin / admin**. Written to `kismet_site.conf` under `/data/kismet_home/.kismet` on each start. Empty option fields fall back to admin/admin. Kismet does not document a no-login mode. |
 
 `run.sh` sets `HOME=/data/kismet_home` so Kismet config and logs survive rebuilds. It uses `type=linuxwifi` on the command line for each Wi-Fi source, runs `rfkill unblock`, logs `ip -br link` at startup, and runs `iw dev <iface> set type monitor` when possible.
 
@@ -49,4 +49,4 @@ Use the companion **ha-kismet-tracker** Home Assistant custom integration (sibli
 
 ## Security
 
-Prefer restricting access to port 2501 and/or enabling Kismet’s own HTTP authentication if the API is reachable beyond localhost.
+Restrict access to port **2501** (firewall/VLAN). The default **admin/admin** credentials are convenient on a trusted LAN only — use strong unique values if the Web UI or API may be reachable from untrusted networks.

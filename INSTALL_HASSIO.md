@@ -11,7 +11,7 @@ Requires a **64-bit** Home Assistant OS install (**aarch64** or **amd64**). Kism
 3. **Add-on store** → refresh → install **Kismet Sniffer** (folder `kismet/` in repo).
 4. **Configuration:** set `wifi_interfaces` (e.g. `wlan0`). Enable BLE only if you use `hci0` (or adjust `ble_interface`).
 5. **Start** the add-on; open **Log** and confirm Kismet starts without fatal errors.
-6. **Open Web UI** on the add-on card (native Kismet UI on port **2501**). First visit may prompt to create an admin user unless you set **http_username** and **http_password** in add-on options (both required together).
+6. **Open Web UI** on the add-on card (native Kismet UI on port **2501**). Default login is **admin** / **admin** (change in add-on options); the wizard is skipped via generated `kismet_site.conf`.
 7. **API:** Kismet listens on **2501/tcp** on the **host**. From another machine: `http://<HA_LAN_IP>:2501/` (or `GET .../devices/last-time/-1/devices.json`).
 
 **Wi‑Fi:** use real interface names from the host (`ip link` over SSH); **`wlan0` is often wrong**. You need hardware/drivers that support **monitor mode** (often an external USB adapter).

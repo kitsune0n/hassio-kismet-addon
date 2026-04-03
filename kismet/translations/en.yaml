@@ -12,8 +12,8 @@ configuration:
     name: Extra Kismet arguments
     description: Optional arguments appended to the Kismet command line.
   http_username:
-    name: Web UI username (optional)
-    description: If set together with password, writes kismet_site.conf so you skip first-run browser setup. Stored under persistent add-on data.
+    name: Web UI username
+    description: Default admin — written to kismet_site.conf so the first-run login wizard is skipped. Change for security on untrusted networks. Stored under persistent add-on data.
   http_password:
-    name: Web UI password (optional)
-    description: Must be set with http_username if you use fixed credentials.
+    name: Web UI password
+    description: Default admin — use with username; empty fields in options fall back to admin / admin.
