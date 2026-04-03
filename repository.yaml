@@ -1,0 +1,4 @@
+# https://developers.home-assistant.io/docs/add-ons/repository
+name: Kismet add-ons
+url: https://github.com/kitsune0n/hassio-kismet-addon
+maintainer: kitsune0n
