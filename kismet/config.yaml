@@ -1,18 +1,20 @@
+---
 name: Kismet Sniffer
 version: "0.1.0"
 slug: kismet
 description: Kismet Wi-Fi (and optional BLE) capture for probe/presence detection. REST API on port 2501.
-url: https://github.com/your-org/hassio-kismet-addon
+url: https://github.com/kitsune0n/hassio-kismet-addon
 init: false
 startup: application
 boot: auto
 host_network: true
 privileged: true
 arch:
+  - armhf
+  - armv7
   - aarch64
   - amd64
-  - armv7
-map: []
+  - i386
 options:
   wifi_interfaces: wlan0
   enable_ble_capture: false
@@ -21,5 +23,5 @@ options:
 schema:
   wifi_interfaces: str
   enable_ble_capture: bool
-  ble_interface: str?
-  kismet_additional_args: str?
+  ble_interface: str
+  kismet_additional_args: str

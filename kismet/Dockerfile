@@ -2,6 +2,16 @@
 ARG BUILD_FROM
 FROM ${BUILD_FROM}
 
+ARG BUILD_VERSION="0.1.0"
+ARG BUILD_ARCH
+
+LABEL \
+    io.hass.version="${BUILD_VERSION}" \
+    io.hass.type="addon" \
+    io.hass.arch="${BUILD_ARCH}" \
+    io.hass.name="Kismet Sniffer" \
+    io.hass.description="Kismet Wi-Fi (and optional BLE) capture; REST API port 2501."
+
 # Kismet APT repository (Debian Bookworm)
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
