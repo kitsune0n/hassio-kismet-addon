@@ -14,12 +14,10 @@ privileged:
   - NET_ADMIN
   - NET_RAW
   - SYS_ADMIN
+# Kismet APT "bookworm" channel is built for aarch64 and amd64 only.
 arch:
-  - armhf
-  - armv7
   - aarch64
   - amd64
-  - i386
 options:
   wifi_interfaces: wlan0
   enable_ble_capture: false
