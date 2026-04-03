@@ -78,5 +78,7 @@ if [[ ${#KISMET_SOURCES[@]} -eq 0 ]]; then
     exit 1
 fi
 
+# Kismet resolves the config dir from the user record (root -> /root), not from $HOME.
+# --homedir forces ~/.kismet and kismet_site.conf to ${HOME}/.kismet (persistent).
 # shellcheck disable=SC2086
-exec kismet "${KISMET_SOURCES[@]}" ${EXTRA_ARGS}
+exec kismet --no-ncurses --homedir="${HOME}" "${KISMET_SOURCES[@]}" ${EXTRA_ARGS}
