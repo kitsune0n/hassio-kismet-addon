@@ -33,7 +33,7 @@ Use the companion **ha-kismet-tracker** Home Assistant custom integration (sibli
 | `kismet_additional_args` | Extra CLI flags passed to `kismet`. |
 | `http_username` / `http_password` | Default **admin / admin**. Written to `kismet_site.conf` under `/data/kismet_home/.kismet` on each start. Empty option fields fall back to admin/admin. Kismet does not document a no-login mode. |
 
-`run.sh` sets `HOME=/data/kismet_home` and starts Kismet with **`--homedir`** pointing there (the binary otherwise uses `~root/.kismet` from the passwd database and ignores `$HOME`). It uses `type=linuxwifi` on the command line for each Wi-Fi source, runs `rfkill unblock`, logs `ip -br link` at startup, and runs `iw dev <iface> set type monitor` when possible.
+`run.sh` sets `HOME=/data/kismet_home`, symlinks **`/root/.kismet`** to that path (Kismet expands `%h` from passwd for paths and UI copy), writes **`/etc/kismet/kismet_site.conf`** plus the same in `~/.kismet` with default HTTP credentials, and starts Kismet with **`--homedir`**. It uses `type=linuxwifi` per Wi-Fi source, `rfkill unblock`, logs `ip -br link`, and runs `iw dev <iface> set type monitor` when possible.
 
 ### “Unable to find driver for …” / capture fails
 

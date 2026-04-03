@@ -1,6 +1,6 @@
 ---
 name: Kismet Sniffer
-version: "0.2.2"
+version: "0.2.3"
 slug: kismet
 description: Kismet Wi-Fi (and optional BLE) capture for probe/presence detection. REST API on port 2501.
 url: https://github.com/kitsune0n/hassio-kismet-addon
