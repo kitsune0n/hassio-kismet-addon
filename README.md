@@ -18,7 +18,8 @@ The image installs `kismet-core`, `kismet-capture-linux-wifi`, `kismet-capture-l
 
 1. **Settings → Add-ons → ⋮ → Repositories** → add this Git URL.
 2. Find **Kismet Sniffer** in the store under the new section and install it.
-3. Configure `wifi_interfaces`, start the add-on, check logs.
+3. Configure **Wi-Fi interfaces** (see below), optionally set fixed **HTTP username/password** for the native UI, start the add-on, check logs.
+4. Use **Open Web UI** on the add-on card to open the standard Kismet dashboard (`http://<host>:2501`).
 
 Use the companion **ha-kismet-tracker** Home Assistant custom integration (sibling repo in the same mono-project, or your fork) to poll Kismet’s JSON API for whitelisted MAC addresses only.
 
@@ -26,12 +27,19 @@ Use the companion **ha-kismet-tracker** Home Assistant custom integration (sibli
 
 | Key | Description |
 | --- | --- |
-| `wifi_interfaces` | Comma-separated interfaces (e.g. `wlan0`). |
+| `wifi_interfaces` | Comma-separated interfaces. **Must match a Wi-Fi interface on the HA host** (`ip link` / `iw dev` via SSH). The default `wlan0` is often wrong (many boards use `wlp…` or `wlan1`). |
 | `enable_ble_capture` | Adds a BLE/HCI capture source when `true`. |
 | `ble_interface` | HCI name (default `hci0`). |
 | `kismet_additional_args` | Extra CLI flags passed to `kismet`. |
+| `http_username` / `http_password` | Optional. If both set, Kismet gets a fixed admin login via `kismet_site.conf` (persistent under `/data/kismet_home`). Otherwise open the Web UI once to create the admin user. |
 
-`run.sh` runs `iw dev <iface> set type monitor` before starting Kismet when possible.
+`run.sh` sets `HOME=/data/kismet_home` so Kismet config and logs survive rebuilds. It uses `type=linuxwifi` on the command line for each Wi-Fi source, runs `rfkill unblock`, logs `ip -br link` at startup, and runs `iw dev <iface> set type monitor` when possible.
+
+### “Unable to find driver for …” / capture fails
+
+- Wrong interface name (most common).
+- Chipset/driver without mac80211 monitor mode (many built-in Pi Wi-Fi chips need an external USB adapter with a known-good driver).
+- Interface still **managed** by host NetworkManager — may need to take it down on the host or use a dedicated USB radio for capture only.
 
 ## Troubleshooting
 

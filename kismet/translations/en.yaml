@@ -1,7 +1,7 @@
 configuration:
   wifi_interfaces:
     name: Wi-Fi interfaces
-    description: Comma-separated interfaces (e.g. wlan0,wlan1). Put in monitor mode before Kismet starts.
+    description: Comma-separated Linux interface names from the host. Run ip link on HA (SSH) — often not wlan0 (wlp…, wlan1).
   enable_ble_capture:
     name: Enable BLE
     description: Add Linux Bluetooth HCI capture (requires compatible adapter).
@@ -11,3 +11,9 @@ configuration:
   kismet_additional_args:
     name: Extra Kismet arguments
     description: Optional arguments appended to the Kismet command line.
+  http_username:
+    name: Web UI username (optional)
+    description: If set together with password, writes kismet_site.conf so you skip first-run browser setup. Stored under persistent add-on data.
+  http_password:
+    name: Web UI password (optional)
+    description: Must be set with http_username if you use fixed credentials.

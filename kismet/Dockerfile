@@ -3,7 +3,7 @@
 ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:bookworm
 FROM ${BUILD_FROM}
 
-ARG BUILD_VERSION="0.1.0"
+ARG BUILD_VERSION="0.2.0"
 ARG BUILD_ARCH
 
 LABEL \
@@ -22,6 +22,7 @@ RUN apt-get update \
         iproute2 \
         iw \
         jq \
+        rfkill \
         wireless-tools \
     && curl -fsSL https://www.kismetwireless.net/repos/kismet-release.gpg.key \
         | gpg --dearmor -o /etc/apt/trusted.gpg.d/kismet-release.gpg \

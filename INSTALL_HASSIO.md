@@ -11,9 +11,12 @@ Requires a **64-bit** Home Assistant OS install (**aarch64** or **amd64**). Kism
 3. **Add-on store** → refresh → install **Kismet Sniffer** (folder `kismet/` in repo).
 4. **Configuration:** set `wifi_interfaces` (e.g. `wlan0`). Enable BLE only if you use `hci0` (or adjust `ble_interface`).
 5. **Start** the add-on; open **Log** and confirm Kismet starts without fatal errors.
-6. **API:** Kismet listens on port **2501** on the **host**. From another machine: `http://<HA_LAN_IP>:2501/` (or test `GET .../devices/last-time/-1/devices.json`).
+6. **Open Web UI** on the add-on card (native Kismet UI on port **2501**). First visit may prompt to create an admin user unless you set **http_username** and **http_password** in add-on options (both required together).
+7. **API:** Kismet listens on **2501/tcp** on the **host**. From another machine: `http://<HA_LAN_IP>:2501/` (or `GET .../devices/last-time/-1/devices.json`).
 
-**Wi‑Fi:** you need an adapter that supports **monitor mode** on the HA host (often an external USB dongle).
+**Wi‑Fi:** use real interface names from the host (`ip link` over SSH); **`wlan0` is often wrong**. You need hardware/drivers that support **monitor mode** (often an external USB adapter).
+
+**Persistence:** Kismet home config is under add-on **`/data/kismet_home`** (HTTP users, UUID), so it survives image updates.
 
 ## 2. Integration Kismet Tracker
 
@@ -44,7 +47,7 @@ This app uses `full_access: true` for Wi‑Fi/BLE capture. After install, you ma
 
 ## 5. Add-on does not appear in the store
 
-- **Architecture:** the add-on declares `arch` (including `armhf`, `i386`) so it matches common Home Assistant OS boards; if it still does not show, open **Settings → System → Logs**, choose **Supervisor**, and look for parse/build errors for `kismet`.
+- **Architecture:** this add-on is **aarch64** and **amd64** only (Kismet Bookworm repo). 32-bit HA installs are not supported.
 - **Reload:** **Settings → Add-ons →** (store) refresh the page; or restart the **Supervisor** host from **Developer tools** if you use it.
 - **Stale git clone:** Remove the custom repository URL, save, add it again so the supervisor re-clones the repo.
 
