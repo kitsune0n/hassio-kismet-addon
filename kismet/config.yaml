@@ -8,7 +8,12 @@ init: false
 startup: application
 boot: auto
 host_network: true
-privileged: true
+# `privileged` must be a list of capability names (not boolean). Invalid YAML was skipped by Supervisor.
+full_access: true
+privileged:
+  - NET_ADMIN
+  - NET_RAW
+  - SYS_ADMIN
 arch:
   - armhf
   - armv7
