@@ -4,6 +4,8 @@ Use branch **`dev`** until it is merged to `main` (GitHub: **Settings → Genera
 
 ## 1. Add-on Kismet
 
+Requires a **64-bit** Home Assistant OS install (**aarch64** or **amd64**). Kismet’s Debian Bookworm packages are not published for 32-bit Supervisor targets.
+
 1. **Settings → Add-ons →** (three dots) **Repositories**.
 2. Add: `https://github.com/kitsune0n/hassio-kismet-addon`
 3. **Add-on store** → refresh → install **Kismet Sniffer** (folder `kismet/` in repo).

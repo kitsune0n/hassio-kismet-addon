@@ -1,5 +1,6 @@
 # syntax=docker/dockerfile:1
-ARG BUILD_FROM
+# Supervisor injects BUILD_FROM per arch; default avoids empty FROM in static analysis.
+ARG BUILD_FROM=ghcr.io/home-assistant/amd64-base-debian:bookworm
 FROM ${BUILD_FROM}
 
 ARG BUILD_VERSION="0.1.0"
@@ -27,7 +28,11 @@ RUN apt-get update \
     && echo "deb [signed-by=/etc/apt/trusted.gpg.d/kismet-release.gpg] https://www.kismetwireless.net/repos/apt/release/bookworm bookworm main" \
         > /etc/apt/sources.list.d/kismet.list \
     && apt-get update \
-    && apt-get install -y --no-install-recommends kismet \
+    && apt-get install -y --no-install-recommends \
+        kismet-core \
+        kismet-capture-linux-wifi \
+        kismet-capture-linux-bluetooth \
+        kismet-logtools \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 

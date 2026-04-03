@@ -8,9 +8,11 @@ Third-party **Home Assistant Supervisor** add-on repository that runs [Kismet](h
 
 ## Requirements
 
-- Home Assistant **OS** / **Supervisor** with the add-on store.
+- Home Assistant **OS** / **Supervisor** with the add-on store on **aarch64** or **amd64**. (The Kismet Bookworm APT repo does not publish armv7/armhf/i386.)
 - Wi-Fi hardware that supports **monitor mode** on the host (often an external USB adapter).
 - For Bluetooth LE capture, a suitable HCI adapter and correct interface name (typically `hci0`).
+
+The image installs `kismet-core`, `kismet-capture-linux-wifi`, `kismet-capture-linux-bluetooth`, and `kismet-logtools` — not the `kismet` metapackage (it can depend on optional drivers such as Hak5 Wi-Fi Coconut that are not installable everywhere).
 
 ## Install
 
